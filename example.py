@@ -5,7 +5,7 @@
 #=======================================
 
 import matplotlib.pyplot as plt
-from oneComponent import *
+from polymerSolution import *
 
 # Make plots pretty
 plt.style.use('seaborn-v0_8-dark-palette')

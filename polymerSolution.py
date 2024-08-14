@@ -55,9 +55,9 @@ def endSeq(m,deltaS,N):
     vec.append(N)
     return vec
 
-# Sequence generating functions (continuous chains)
+# Sequence generating functions (discrete chains)
 def sequence(N,M,seq="even",indices=None):
-    vec = np.zeros((N+1,1))
+    vec = np.zeros((N,1))
     if seq == "even":
         for i in range(0,M):
             vec[int((i+1)*N/(M+1))] = 1
@@ -176,6 +176,8 @@ def Sstar(k,u0,rhoC,N,f):
 
 # Structure factor for continuous chain with both ends functionalized (exactly from Eq. 22 in Balzer and Fredrickson 2024 and equivalent to Eq. 53 from Fredrickson and Delaney 2018 --> https://doi.org/10.1063/1.5027582)
 def Stele(k,u0,lam,rhoC,N):
+    def psiStar0(lam,rhoC,M):
+        return (np.sqrt(1.0  + 4.0*lam*M*rhoC) + 1.0)/2.0
     rho0 = rhoC * N
     x = k**2 * N/6.0
     G = debye(x) + 2*r(x,N,0,N)**2/(psiStar0(lam,rhoC,2)**2/(2*lam*rhoC) - np.exp(-x))
