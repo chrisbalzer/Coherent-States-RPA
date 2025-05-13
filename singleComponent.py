@@ -28,7 +28,7 @@ def A(x,si,sj,N):
 def r(x,s1,s2,N):
     if x == 0:
         return (s1-s2)/N
-    return 1.0/x * (1 -  A(x,s1,s2,N))
+    return 1.0/x * (1 - np.exp(-x *(s1-s2)/N))
 
 # Sequence generating functions (continuous chains)
 def centerSeq(m,deltaS,N,center=1/2):
@@ -76,11 +76,11 @@ def sequence(N,M,seq="even",indices=None):
 # Structure factor 
 #=======================
 # Structure factor for continuous chain with supramolecular linkages (Eq. 16 from Balzer and Fredrickson 2024)
-def S(k,u0,lam,rhoC,sVec):
+def S(k,u0,rhoC,lam,sVec):
     #=======================
     # Input description
     #   u0    --> excluded volume parameter in units of kT*v
-    #   lam   --> "bond energy" in units of kT
+    #   lam   --> reversible "bond strength" in units of kT
     #   rhoC  --> reduced chain concentration = n Rg^3/V
     #   sVec  --> Array of functional group positions. Always has form {0, \alpha_1, \alpha_2, ..., \alpha_M, N}. Note the first and last entry are alwats 0 and N.
     #=======================    
@@ -135,7 +135,7 @@ def Sd(k,u0,rhoC,lam,alphaVec):
 
     sum1 = 0
     for j in range(M):
-        for m in range(1,N+1):
+        for m in range(N):
             sum1 +=  Phix**(np.abs(alphaIndx[j] - m))
     sum1 /= N
      
@@ -153,14 +153,14 @@ def Sd(k,u0,rhoC,lam,alphaVec):
 #=======================
 # Other structure factor expressions to compare to
 #=======================
-# Structure factor for continuous Gaussian chain
+# Structure factor for linear continuous Gaussian chain
 def Scontinuous(k,u0,rhoC,N):
     rho0 = rhoC * N
     x = k**2 * N/6.0
     G = debye(x)
     return rho0*N*G/(1 + u0*rho0*N*G)
 
-# Structure factor for discrete Gaussian chain
+# Structure factor for linear discrete Gaussian chain
 def Sdiscrete(k,u0,rhoC,N):
     rho0 = rhoC * N
     x    =  k**2/6.0

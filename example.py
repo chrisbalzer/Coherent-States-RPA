@@ -5,7 +5,7 @@
 #=======================================
 
 import matplotlib.pyplot as plt
-from polymerSolution import *
+from singleComponent import *
 
 # Make plots pretty
 plt.style.use('seaborn-v0_8-dark-palette')
@@ -52,7 +52,7 @@ f     = plt.figure(figsize=(5, 4))
 # Continuous Gaussian Chain
 Svals = 0*kVec
 for k in range(len(kVec)):
-    Svals[k] = S(kVec[k],u0,lam,rhoC,contSeq)
+    Svals[k] = S(kVec[k],u0,rhoC,lam,contSeq)
 plt.plot(kVec*Rg0,Svals/(rho0*N),'-',color='black',label=r"CGC")
 
 # Discrete Gaussian Chain
