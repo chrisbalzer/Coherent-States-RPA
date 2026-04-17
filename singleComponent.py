@@ -175,7 +175,7 @@ def Sstar(k,u0,rhoC,N,f):
     return rho0*N*G/(1 + u0*rho0*N*G)
 
 # Structure factor for continuous chain with both ends functionalized (exactly from Eq. 22 in Balzer and Fredrickson 2024 and equivalent to Eq. 53 from Fredrickson and Delaney 2018 --> https://doi.org/10.1063/1.5027582)
-def Stele(k,u0,lam,rhoC,N):
+def Stele(k,u0,rhoC,lam,N):
     def psiStar0(lam,rhoC,M):
         return (np.sqrt(1.0  + 4.0*lam*M*rhoC) + 1.0)/2.0
     rho0 = rhoC * N

@@ -83,7 +83,7 @@ f     = plt.figure(figsize=(5, 4))
 for lam in lams:
     Svals = 0*kVec
     for k in range(len(kVec)):
-        Svals[k] = S(kVec[k],u0,lam,rhoC,contSeq)
+        Svals[k] = S(kVec[k],u0,rhoC,lam,contSeq)
     plt.plot(kVec*Rg0,Svals/(rho0*N),'-',label=r"%.2f"%lam)
 
 plt.ylim([1e-2, 1e5])
